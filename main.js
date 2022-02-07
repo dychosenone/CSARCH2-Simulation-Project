@@ -8,16 +8,14 @@ $(document).ready(function(e) {
         var input = $("#input").val();
 
         if (input.length!=8 && input.length!=32){
-            $("#input").css('border-color', 'red');
-            $("#inputHelp").css('color', 'red');
+            highlightErrorInput();
             $("#inputHelp").text("Invalid number of digits or bits. "+inputHelp_msg);
         }
 
         else{
             console.log(input);
             var converted = convertHexToBinary(input);
-            $("#inputHelp").css('color', '#888');
-            $("#input").css('border-color', '');
+            removeErrorInput();
             $("#inputHelp").text(inputHelp_msg);
 
             $("#finalAnswer").text(converted);
@@ -36,6 +34,12 @@ function convertHexToBinary (number) {
     return binary;
 }
 
-function checkHexInput(input) {
-    
+function highlightErrorInput (){
+    $("#input").css('border-color', 'red');
+    $("#inputHelp").css('color', 'red');
+}
+
+function removeErrorInput (){
+    $("#inputHelp").css('color', '#888');
+    $("#input").css('border-color', '');
 }
