@@ -13,22 +13,26 @@ $(document).ready(function(e) {
         $("#inputAlert").hide();
 
         var inputSelect = $('input[name="inputSelect"]:checked').val();
+        var outputSelect = $('input[name="outputSelect"]:checked').val()
 
         var input = $("#input").val();
 
         console.log(input);
 
         if(inputValidation(input, inputSelect)) {
-            var converted = convertHexToBinary(input);
+            
+            if(inputSelect === "hexadecimalInput") {
+                var converted = convertHexToBinary(input, outputSelect);
 
-            $("#finalAnswer").text(converted);
-            {
-                console.log(input);
-                var converted = convertHexToBinary(input);
-                removeErrorInput();
-                $("#inputHelp").text(inputHelp_msg);
                 $("#finalAnswer").text(converted);
+               
+            } else {
+                var converted = convertBinaryToDecimal(input, outputSelect);
+                
+                $("#finalAnswer").text(converted);
+                
             }
+    
         }
         
     
@@ -82,7 +86,7 @@ function checkBinary(input) {
 }
 
 
-function convertHexToBinary (number) {
+function convertHexToBinary (number, output) {
     var binary = (parseInt(number, 16).toString(2)).padStart(8, '0');
     console.log(binary);
 
@@ -92,10 +96,10 @@ function convertHexToBinary (number) {
         binary = "0".concat(binary)
     }
 
-    return convertBinaryToDecimal(binary)
+    return convertBinaryToDecimal(binary, output)
 }
 
-function convertBinaryToDecimal (binary) {
+function convertBinaryToDecimal (binary, output) {
 
 
     //first bit is sign bit
@@ -157,7 +161,11 @@ function convertBinaryToDecimal (binary) {
 
     fixed = fixed.concat(sign).concat(MSD.toString()).concat(coefficient).concat("x10^").concat(exponent.toString())
 
-    return float
+    if(output === "floatingSelect") {
+        return float
+    }
+
+    return fixed
 }
 
 function convertBCDtoDecimal (binary, n) {
