@@ -53,7 +53,7 @@ function inputValidation (input, inputType) {
             $("#inputAlert").show();
     
             return false;
-        }
+        } 
 
     } else if(inputType === "binaryInput") {
 
@@ -71,13 +71,13 @@ function inputValidation (input, inputType) {
 
 // Uses Regular Expressions to Check if the Input only contains characters for Hexadecimal
 function checkHexadecimal(input) {
-    let regex = /[0-9A-Fa-f]{6}/g;
+    let regex = /[0-9A-Fa-f]{8}/g;
     return regex.test(input);
 }
 
 // Uses Regular Expressions to Check if the Input only contains characters for binary
 function checkBinary(input) {
-    let regex = /0[xX][0-9a-fA-F]+/;
+    let regex = /^[01]+$/;
     return regex.test(input);
 }
 
