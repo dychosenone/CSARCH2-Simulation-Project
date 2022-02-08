@@ -25,6 +25,12 @@ function convertHexToBinary (number) {
     var binary = (parseInt(number, 16).toString(2)).padStart(8, '0');
     console.log(binary);
 
+    return convertBinaryToDecimal(binary)
+}
+
+function convertBinaryToDecimal (binary) {
+
+
     //first bit is sign bit
     var sign = ""
 
@@ -35,7 +41,6 @@ function convertHexToBinary (number) {
     //var r = "00"
     //binary = r.concat(binary)
 
-    var MSB = 0 //most significant bits of exponent
     var MSD = 0 //first digit
     var ex = 0 //exponent before -101  
     var exponent = 0 //exponent
@@ -77,10 +82,18 @@ function convertHexToBinary (number) {
     var coefficient = co1.concat(co2)
 
 
-    var dec = ""
-    dec = dec.concat(sign).concat(MSD.toString()).concat(coefficient).concat("x10^").concat(exponent.toString())
+    var float = ""
+    var fixed = ""
+    var temp = ""
+    var whole = 0
 
-    return dec
+    temp = temp.concat(MSD.toString()).concat(coefficient)
+    whole = parseInt(temp) * Math.pow(10, exponent)
+    float = float.concat(sign).concat(whole.toString())
+
+    fixed = fixed.concat(sign).concat(MSD.toString()).concat(coefficient).concat("x10^").concat(exponent.toString())
+
+    return fixed
 }
 
 function convertBCDtoDecimal (binary, n) {
