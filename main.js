@@ -25,6 +25,12 @@ function convertHexToBinary (number) {
     var binary = (parseInt(number, 16).toString(2)).padStart(8, '0');
     console.log(binary);
 
+    if(binary.length == 30){
+        binary = "00".concat(binary)
+    } else if(binary.length == 31){
+        binary = "0".concat(binary)
+    }
+
     return convertBinaryToDecimal(binary)
 }
 
@@ -38,10 +44,7 @@ function convertBinaryToDecimal (binary) {
         sign = "-"
     }
 
-    //var r = "00"
-    //binary = r.concat(binary)
-
-    var MSD = 0 //first digit
+    var MSD = 0 //first digit of decimal
     var ex = 0 //exponent before -101  
     var exponent = 0 //exponent
 
