@@ -30,7 +30,11 @@ $(document).ready(function(e) {
     });
 });
 
+function inputValidation () {
 
+
+    return false;
+}
 
 
 function convertHexToBinary (number) {
