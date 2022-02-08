@@ -15,7 +15,7 @@ $(document).ready(function(e) {
         console.log(input);
         var converted = convertHexToBinary(input);
         
-    
+        
         $("#finalAnswer").text(converted);
         else{
             console.log(input);
