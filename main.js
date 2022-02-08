@@ -96,7 +96,7 @@ function convertBinaryToDecimal (binary) {
 
     fixed = fixed.concat(sign).concat(MSD.toString()).concat(coefficient).concat("x10^").concat(exponent.toString())
 
-    return fixed
+    return float
 }
 
 function convertBCDtoDecimal (binary, n) {
