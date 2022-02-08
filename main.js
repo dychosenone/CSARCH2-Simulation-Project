@@ -6,13 +6,19 @@ $(document).ready(function(e) {
 
     var inputHelp_msg = "Your input must be either an 8-digit Hexadecimal Input or 32-bit Binary Input.";
 
+
     $("#inputForm").submit(function (e) {
         e.preventDefault();
+
+        $("#inputAlert").hide();
+
+        var inputSelect = $('input[name="inputSelect"]:checked').val();
+
         var input = $("#input").val();
 
         console.log(input);
 
-        if(inputValidation(input)) {
+        if(inputValidation(input, inputSelect)) {
             var converted = convertHexToBinary(input);
 
             $("#finalAnswer").text(converted);
@@ -38,19 +44,40 @@ function inputValidation (input, inputType) {
 
         return false;
 
-    } else if (input.length != 32 && inputType === "binary") {
-        $("#inputAlert").text("Your binary value is not 32 bits.");
-        $("#inputAlert").show();
+    } 
+    
+    if(inputType === "hexadecimalInput") {
 
-        return false;
+        if (input.length != 8) {
+            $("#inputAlert").text("Your hexademical value is not 8 bits.");
+            $("#inputAlert").show();
+    
+            return false;
+        }
+
+    } else if(inputType === "binaryInput") {
+
+        if (input.length != 32) {
+            $("#inputAlert").text("Your binary value is not 32 bits.");
+            $("#inputAlert").show();
+    
+            return false;
+        }
+
     }
-
 
     return true;
 }
 
-function useRegex(input) {
-    let regex = [0-1];
+// Uses Regular Expressions to Check if the Input only contains characters for Hexadecimal
+function checkHexadecimal(input) {
+    let regex = /[0-9A-Fa-f]{6}/g;
+    return regex.test(input);
+}
+
+// Uses Regular Expressions to Check if the Input only contains characters for binary
+function checkBinary(input) {
+    let regex = /0[xX][0-9a-fA-F]+/;
     return regex.test(input);
 }
 
