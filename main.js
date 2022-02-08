@@ -1,39 +1,57 @@
 // This function runs when the site is loaded
 $(document).ready(function(e) {
 
+    // Hides the Error Div
+    $("#inputAlert").hide();
+
     var inputHelp_msg = "Your input must be either an 8-digit Hexadecimal Input or 32-bit Binary Input.";
 
     $("#inputForm").submit(function (e) {
         e.preventDefault();
         var input = $("#input").val();
 
-        if (input.length!=8 && input.length!=32){
-            highlightErrorInput();
-            $("#inputHelp").text("Invalid number of digits or bits. "+inputHelp_msg);
-        }
-
         console.log(input);
-        var converted = convertHexToBinary(input);
-        
-        
-        $("#finalAnswer").text(converted);
-        else{
-            console.log(input);
+
+        if(inputValidation(input)) {
             var converted = convertHexToBinary(input);
-            removeErrorInput();
-            $("#inputHelp").text(inputHelp_msg);
 
             $("#finalAnswer").text(converted);
+            {
+                console.log(input);
+                var converted = convertHexToBinary(input);
+                removeErrorInput();
+                $("#inputHelp").text(inputHelp_msg);
+                $("#finalAnswer").text(converted);
+            }
         }
         
     
     });
 });
 
-function inputValidation () {
+function inputValidation (input, inputType) {
+    
+    // Check if input is empty
+    if(input === "") {
+        $("#inputAlert").text("Please enter a value.");
+        $("#inputAlert").show();
+
+        return false;
+
+    } else if (input.length != 32 && inputType === "binary") {
+        $("#inputAlert").text("Your binary value is not 32 bits.");
+        $("#inputAlert").show();
+
+        return false;
+    }
 
 
-    return false;
+    return true;
+}
+
+function useRegex(input) {
+    let regex = [0-1];
+    return regex.test(input);
 }
 
 
@@ -182,13 +200,4 @@ function convertBCDtoDecimal (binary, n) {
     }
 
     return co
-}
-function highlightErrorInput (){
-    $("#input").css('border-color', 'red');
-    $("#inputHelp").css('color', 'red');
-}
-
-function removeErrorInput (){
-    $("#inputHelp").css('color', '#888');
-    $("#input").css('border-color', '');
 }
