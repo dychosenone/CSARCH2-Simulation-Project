@@ -3,6 +3,10 @@ $(document).ready(function(e) {
 
     // Hides the Error Div
     $("#inputAlert").hide();
+    $("#copyButton").hide();
+    $("#finalAnswer").hide();
+
+    var clipboard = new ClipboardJS('.clipbtn');
 
     var inputHelp_msg = "Your input must be either an 8-digit Hexadecimal Input or 32-bit Binary Input.";
 
@@ -24,18 +28,21 @@ $(document).ready(function(e) {
             if(inputSelect === "hexadecimalInput") {
                 var converted = convertHexToBinary(input, outputSelect);
 
-                $("#finalAnswer").text(converted);
+                $("#finalAnswer").val(converted);
+                $("#finalAnswer").show();
+                $("#copyButton").show();
                
             } else {
                 var converted = convertBinaryToDecimal(input, outputSelect);
                 
-                $("#finalAnswer").text(converted);
+                $("#finalAnswer").val(converted);
+                $("#finalAnswer").show();
+                $("#copyButton").show();
                 
             }
     
         }
         
-    
     });
 });
 
@@ -57,7 +64,10 @@ function inputValidation (input, inputType) {
             $("#inputAlert").show();
     
             return false;
-        } 
+        } else if (checkHexadecimal(input) == false) {
+            $("#inputAlert").text("Your hexadecimal input is invalid. Please try again.");
+            return false;
+        }
 
     } else if(inputType === "binaryInput") {
 
@@ -65,6 +75,10 @@ function inputValidation (input, inputType) {
             $("#inputAlert").text("Your binary value is not 32 bits.");
             $("#inputAlert").show();
     
+            return false;
+        } else if (checkBinary(input) == false) {
+            $("#inputAlert").text("Your binary input is invalid. Please try again.");
+
             return false;
         }
 

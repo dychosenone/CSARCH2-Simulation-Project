@@ -16,6 +16,7 @@
         <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
 
         <!-- Main Javascript Files-->
+        <script src="dist/clipboard.min.js"></script>
         <script src="main.js"></script>
 
     </head>
@@ -93,7 +94,11 @@
                     Output Screen
                 </div>
                 <div class="card-body">
-                    <p id="finalAnswer"></p>
+                    <input id="finalAnswer" type="text" class="form-control" value="" readonly="readonly"></input>
+                    <br />
+                    <button class="clipbtn btn btn-primary" id="copyButton" data-clipboard-target="#finalAnswer">
+                        Copy to clipboard
+                    </button>
                 </div>
             </div>
             
