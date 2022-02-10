@@ -170,10 +170,11 @@ function convertBinaryToDecimal (binary, output) {
     var whole = 0
 
     temp = temp.concat(MSD.toString()).concat(coefficient)
-    whole = parseInt(temp) * Math.pow(10, exponent)
-    float = float.concat(sign).concat(whole.toString())
+    whole = (parseInt(temp) / 1000000)
+    whole = whole.toFixed(2)
+    fixed = fixed.concat(sign).concat(whole.toString())
 
-    fixed = fixed.concat(sign).concat(MSD.toString()).concat(coefficient).concat("x10^").concat(exponent.toString())
+    float = float.concat(sign).concat(MSD.toString()).concat(coefficient).concat("x10^").concat(exponent.toString())
 
     if(output === "floatingSelect") {
         return float
