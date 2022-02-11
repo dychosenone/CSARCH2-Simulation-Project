@@ -229,7 +229,7 @@ function convertBinaryToDecimal (binary, output) {
     let whole = new BigNumber(temp)
     whole = whole.toFixed(2)
     fixed = fixed.concat(sign).concat(whole.toString())
-
+    console.log(fixed);
     float = float.concat(sign).concat(MSD.toString()).concat(coefficient).concat("x10^").concat(exponent.toString())
 
     $("#signField").text(binary.slice(0,1));
