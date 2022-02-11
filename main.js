@@ -122,6 +122,7 @@ function inputValidation (input, inputType) {
             return false;
         } else if (checkHexadecimal(input) == false) {
             $("#inputAlert").text("Your hexadecimal input is invalid. Please try again.");
+            $("#inputAlert").show();
             return false;
         }
 
