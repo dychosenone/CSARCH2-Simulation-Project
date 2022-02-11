@@ -133,7 +133,7 @@ function convertBinaryToDecimal (binary, output) {
     if(binary[1] == 1 && binary[2] == 1 && binary[3] == 1 && binary[4] == 1 && binary[5] == 0) { 
        
         //infinity
-        return "Infinity"
+        return sign+"Infinity"
 
     } else if(binary[1] == 1 && binary[2] == 1 && binary[3] == 1 && binary[4] == 1 && binary[5] == 1) {
         
