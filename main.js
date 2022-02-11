@@ -223,8 +223,8 @@ function convertBinaryToDecimal (binary, output) {
     var temp = ""
 
     temp = temp.concat(MSD.toString()).concat(coefficient)
-    whole = (parseInt(temp)) * Math.pow(10, exponent)
-    let whole = new BigNumber(whole)
+    temp = (parseInt(temp)) * Math.pow(10, exponent)
+    let whole = new BigNumber(temp)
     whole = whole.toFixed(2)
     fixed = fixed.concat(sign).concat(whole.toString())
     console.log(fixed);
