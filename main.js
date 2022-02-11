@@ -34,8 +34,8 @@ $(document).ready(function(e) {
         }       
     });
 
-    // places space separator for every 4 digits/bits user inputs up until 32 bits
-    $("#input").keypress(function() {
+    // places space separator for every 4 digits user inputs up until 8 bits
+    $("#hexadecimalInput").keypress(function() {
 
         num = 4;
         var str = $(this).val();
@@ -43,11 +43,6 @@ $(document).ready(function(e) {
         switch(str.length){
             case num:
             case 2*num+1:
-            case 3*num+2:
-            case 4*num+3:
-            case 5*num+4:
-            case 6*num+5:
-            case 7*num+6:
                 $(this).val($(this).val()+ " ");
     
         }
@@ -62,8 +57,24 @@ $(document).ready(function(e) {
         var inputSelect = $('input[name="inputSelect"]:checked').val();
         var outputSelect = $('input[name="outputSelect"]:checked').val()
 
-        //input takes string without spaces
-        var input = $("#input").val().replace(/\s/g, '');
+        var input = "";
+
+        // if input is binary, combine all input strings into one
+        if(inputSelect === "binaryInput"){
+            var sign = $("#binarySign").val();
+            var combi = $("#binaryCombi").val();
+            var exp = $("#binaryExponent").val();
+            var coefficient = $("#binaryCoefficient").val();
+
+            console.log("combi "+combi);
+
+            input = sign + combi+ exp + coefficient;
+        }
+
+        // else hex input takes string without spaces
+        else{
+            input = $("#hexadecimalInput").val().replace(/\s/g, '');
+        }
 
         console.log(input);
 
@@ -179,13 +190,11 @@ function convertBinaryToDecimal (binary, output) {
         //infinity
         return sign + "Infinity";
 
-    } else if(binary[1] === 1 && binary[2] === 1 && binary[3] === 1 && binary[4] === 1 && binary[5] === 1) {
-        
+    } else if(binary[1] == 1 && binary[2] == 1 && binary[3] == 1 && binary[4] == 1 && binary[5] == 1) {
         //NaN
         return "NaN";
 
     } else if(binary[1] == 1 && binary[2] == 1) {
-
         //range is 8 - 9
         MSD = 8
         if(binary[5] == 1) {
