@@ -10,6 +10,26 @@ $(document).ready(function(e) {
 
     var inputHelp_msg = "Your input must be either an 8-digit Hexadecimal Input or 32-bit Binary Input.";
 
+    // places space separator for every 4 digits/bits user inputs up until 32 bits
+    $("#input").keyup(function() {
+
+        num = 4;
+        var str = $(this).val();
+
+        switch(str.length){
+            case num:
+            case 2*num+1:
+            case 3*num+2:
+            case 4*num+3:
+            case 5*num+4:
+            case 6*num+5:
+            case 7*num+6:
+                $(this).val($(this).val()+ " ");
+
+        }
+
+    })
+
 
     $("#inputForm").submit(function (e) {
         e.preventDefault();
@@ -19,7 +39,8 @@ $(document).ready(function(e) {
         var inputSelect = $('input[name="inputSelect"]:checked').val();
         var outputSelect = $('input[name="outputSelect"]:checked').val()
 
-        var input = $("#input").val();
+        //input takes string without spaces
+        var input = $("#input").val().replace(/\s/g, '');
 
         console.log(input);
 
