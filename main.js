@@ -221,10 +221,12 @@ function convertBinaryToDecimal (binary, output) {
     var float = ""
     var fixed = ""
     var temp = ""
-    var whole = 0
 
     temp = temp.concat(MSD.toString()).concat(coefficient)
-    whole = (parseInt(temp) / 1000000)
+    //whole = (parseInt(temp) / 1000000)
+    //whole = whole.toFixed(2)
+    //whole = (parseInt(temp)) * Math.pow(10, exponent)
+    let whole = new BigNumber(temp)
     whole = whole.toFixed(2)
     fixed = fixed.concat(sign).concat(whole.toString())
 
