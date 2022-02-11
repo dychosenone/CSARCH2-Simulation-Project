@@ -47,7 +47,7 @@
                             <div class="col-sm">
                                 <label class="form-label">Input Select:</label>
                                 <div class="form-check">
-                                    <input class="form-check-input" type="radio" name="inputSelect" id="hexadecimalSelect1" value="hexadecimalInput"checked>
+                                    <input class="form-check-input" type="radio" name="inputSelect" id="hexadecimalSelect1" value="hexadecimalInput" checked>
                                     <label class="form-check-label" for="hexadecimalSelect1">
                                         8-digit Hexadecimal Input
                                     </label>
@@ -79,7 +79,22 @@
                         </div>
 
                         <label for="input" class="form-label">Input</label>
-                        <input type="text" id="input" class="form-control">
+                        <input type="text" id="hexadecimalInput" class="form-control" placeholder="Input">
+
+                        <div class="row" id="binaryInput">
+                            <div class="col-1">
+                              <input type="text" class="form-control" placeholder="Sign" maxlength="1">
+                            </div>
+                            <div class="col-2">
+                              <input type="text" class="form-control" placeholder="Combination Field" maxlength="5">
+                            </div>
+                            <div class="col-3">
+                                <input type="text" class="form-control" placeholder="Exponent Field" maxlength="6">
+                              </div>
+                              <div class="col-6">
+                                <input type="text" class="form-control" placeholder="Coefficient Continuation" maxlength="20">
+                              </div>
+                        </div>
                         <div id="inputHelp" class="form-text">
                             Your input must be either an 8-digit Hexadecimal Input or 32-bit Binary Input.
                         </div>

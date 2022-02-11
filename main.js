@@ -6,9 +6,33 @@ $(document).ready(function(e) {
     $("#copyButton").hide();
     $("#finalAnswer").hide();
 
+    var inputSelect = $('input[name="inputSelect"]:checked').val();
+
+    if(inputSelect === "hexadecimalInput") {
+        $("#binaryInput").hide();
+        $("#hexadecimalInput").show();
+    } else  if(inputSelect === "binaryInput") {
+        $("#binaryInput").show();
+        $("#hexadecimalInput").hide();
+    }     
+
+
     var clipboard = new ClipboardJS('.clipbtn');
 
     var inputHelp_msg = "Your input must be either an 8-digit Hexadecimal Input or 32-bit Binary Input.";
+
+    $('input[type=radio][name=inputSelect]').change(function (e) {
+
+        var inputSelect = $('input[name="inputSelect"]:checked').val();
+
+        if(inputSelect === "hexadecimalInput") {
+            $("#binaryInput").hide();
+            $("#hexadecimalInput").show();
+        } else  if(inputSelect === "binaryInput") {
+            $("#binaryInput").show();
+            $("#hexadecimalInput").hide();
+        }       
+    });
 
     // places space separator for every 4 digits/bits user inputs up until 32 bits
     $("#input").keypress(function() {
@@ -48,9 +72,6 @@ $(document).ready(function(e) {
             if(inputSelect === "hexadecimalInput") {
                 var converted = convertHexToBinary(input, outputSelect);
 
-
-
-
                 $("#finalAnswer").val(converted);
                 $("#finalAnswer").show();
                 $("#copyButton").show();
@@ -68,6 +89,8 @@ $(document).ready(function(e) {
         
     });
 });
+
+
 
 function inputValidation (input, inputType) {
     
@@ -158,7 +181,7 @@ function convertBinaryToDecimal (binary, output) {
         //infinity
         return sign+"Infinity";
 
-    } else if(binary[1] == 1 && binary[2] == 1 && binary[3] == 1 && binary[4] == 1 && binary[5] == 1) {
+    } else if(binary[1] === 1 && binary[2] === 1 && binary[3] === 1 && binary[4] === 1 && binary[5] === 1) {
         
         //NaN
         return "NaN";
