@@ -35,7 +35,6 @@ $(document).ready(function(e) {
 
     })
 
-
     $("#inputForm").submit(function (e) {
         e.preventDefault();
 
