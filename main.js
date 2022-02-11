@@ -153,12 +153,12 @@ function convertBinaryToDecimal (binary, output) {
     if(binary[1] == 1 && binary[2] == 1 && binary[3] == 1 && binary[4] == 1 && binary[5] == 0) { 
        
         //infinity
-        return sign+"Infinity"
+        return sign+"Infinity";
 
     } else if(binary[1] == 1 && binary[2] == 1 && binary[3] == 1 && binary[4] == 1 && binary[5] == 1) {
         
         //NaN
-        return "NaN"
+        return "NaN";
 
     } else if(binary[1] == 1 && binary[2] == 1) {
 
