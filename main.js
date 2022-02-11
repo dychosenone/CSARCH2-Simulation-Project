@@ -150,9 +150,7 @@ function convertHexToBinary (number, output) {
     var binary = (parseInt(number, 16).toString(2)).padStart(8, '0');
     console.log(binary);
 
-    if(binary.length == 30){
-        binary = "00".concat(binary)
-    } else if(binary.length == 31){
+    while(binary.length != 32){
         binary = "0".concat(binary)
     }
 
@@ -179,7 +177,7 @@ function convertBinaryToDecimal (binary, output) {
     if(binary[1] == 1 && binary[2] == 1 && binary[3] == 1 && binary[4] == 1 && binary[5] == 0) { 
        
         //infinity
-        return sign+"Infinity";
+        return sign + "Infinity";
 
     } else if(binary[1] === 1 && binary[2] === 1 && binary[3] === 1 && binary[4] === 1 && binary[5] === 1) {
         
