@@ -48,13 +48,16 @@ $(document).ready(function(e) {
             if(inputSelect === "hexadecimalInput") {
                 var converted = convertHexToBinary(input, outputSelect);
 
+
+
+
                 $("#finalAnswer").val(converted);
                 $("#finalAnswer").show();
                 $("#copyButton").show();
                
             } else {
                 var converted = convertBinaryToDecimal(input, outputSelect);
-                
+           
                 $("#finalAnswer").val(converted);
                 $("#finalAnswer").show();
                 $("#copyButton").show();
@@ -197,6 +200,11 @@ function convertBinaryToDecimal (binary, output) {
     fixed = fixed.concat(sign).concat(whole.toString())
 
     float = float.concat(sign).concat(MSD.toString()).concat(coefficient).concat("x10^").concat(exponent.toString())
+
+    $("#signField").val(binary.slice(0,0));
+    $("#combinationField").val(binary.slice(1,5))
+    $("#exponentContinuation").val(binary.slice(6,11))
+    $("#coefficientContinuation").val(binary.slice(12,31))
 
     if(output === "floatingSelect") {
         return float
