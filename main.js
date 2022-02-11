@@ -16,7 +16,6 @@ $(document).ready(function(e) {
         $("#hexadecimalInput").hide();
     }     
 
-
     var clipboard = new ClipboardJS('.clipbtn');
 
     var inputHelp_msg = "Your input must be either an 8-digit Hexadecimal Input or 32-bit Binary Input.";
@@ -68,7 +67,7 @@ $(document).ready(function(e) {
 
             console.log("combi "+combi);
 
-            input = sign + combi+ exp + coefficient;
+            input = sign + combi + exp + coefficient;
         }
 
         // else hex input takes string without spaces
@@ -127,7 +126,7 @@ function inputValidation (input, inputType) {
         }
 
     } else if(inputType === "binaryInput") {
-
+        console.log(input);
         if (input.length != 32) {
             $("#inputAlert").text("Your binary value is not 32 bits.");
             $("#inputAlert").show();
@@ -135,7 +134,7 @@ function inputValidation (input, inputType) {
             return false;
         } else if (checkBinary(input) == false) {
             $("#inputAlert").text("Your binary input is invalid. Please try again.");
-
+            $("#inputAlert").show();
             return false;
         }
 
@@ -231,10 +230,10 @@ function convertBinaryToDecimal (binary, output) {
 
     float = float.concat(sign).concat(MSD.toString()).concat(coefficient).concat("x10^").concat(exponent.toString())
 
-    $("#signField").val(binary.slice(0,0));
-    $("#combinationField").val(binary.slice(1,5))
-    $("#exponentContinuation").val(binary.slice(6,11))
-    $("#coefficientContinuation").val(binary.slice(12,31))
+    $("#signField").text(binary.slice(0,1));
+    $("#combinationField").text(binary.slice(1,6));
+    $("#exponentContinuation").text(binary.slice(6,12));
+    $("#coefficientContinuation").text(binary.slice(12,32));
 
     if(output === "floatingSelect") {
         return float
