@@ -182,6 +182,12 @@ function convertBinaryToDecimal (binary, output) {
     var ex = 0 //exponent before -101  
     var exponent = 0 //exponent
 
+    
+    $("#signField").text(binary.slice(0,1));
+    $("#combinationField").text(binary.slice(1,6));
+    $("#exponentContinuation").text(binary.slice(6,12));
+    $("#coefficientContinuation").text(binary.slice(12,32));
+
     //next 5 bits are combination field 
     //abcde (1 - 7) || ab are MSB of the next 6 bits || cde tells the first digit 
     //11cde (8 - 9) || cd are MSB of the next 6 bits || e tells if first digit is 8 or 9
@@ -231,10 +237,6 @@ function convertBinaryToDecimal (binary, output) {
     console.log(fixed);
     float = float.concat(sign).concat(MSD.toString()).concat(coefficient).concat("x10^").concat(exponent.toString())
 
-    $("#signField").text(binary.slice(0,1));
-    $("#combinationField").text(binary.slice(1,6));
-    $("#exponentContinuation").text(binary.slice(6,12));
-    $("#coefficientContinuation").text(binary.slice(12,32));
 
     if(output === "floatingSelect") {
         return float
