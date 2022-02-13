@@ -207,16 +207,16 @@ function convertBinaryToDecimal (binary, output) {
             MSD = 9
         } 
 
-        ex = (binary[3] * 128) + (binary[4] * 64) + (binary[6] * 32) + (binary[7] * 16) + (binary[8] * 8) +
-        (binary[9] * 4) + (binary[10] * 2) + (binary[11] * 1)
+        ex = (parseInt(binary[3]) * 128) + (parseInt(binary[4]) * 64) + (parseInt(binary[6]) * 32) + (parseInt(binary[7]) * 16) + (parseInt(binary[8]) * 8) +
+        (parseInt(binary[9]) * 4) + (parseInt(binary[10]) * 2) + (parseInt(binary[11]) * 1)
         exponent = ex - 101
  
     } else {
 
         //range is 1 - 7
-        MSD = (binary[3] * 4) + (binary[4] * 2) + (binary[5] * 1)
-        ex = (binary[1] * 128) + (binary[2] * 64) + (binary[6] * 32) + (binary[7] * 16) + (binary[8] * 8) +
-        (binary[9] * 4) + (binary[10] * 2) + (binary[11] * 1)
+        MSD = (parseInt(binary[3]) * 4) + (parseInt(binary[4]) * 2) + (parseInt(binary[5]) * 1)
+        ex = (parseInt(binary[1]) * 128) + (parseInt(binary[2]) * 64) + (parseInt(binary[6]) * 32) + (parseInt(binary[7]) * 16) + (parseInt(binary[8]) * 8) +
+        (parseInt(binary[9]) * 4) + (parseInt(binary[10]) * 2) + (parseInt(binary[11]) * 1)
         exponent = ex - 101
     }
 
@@ -232,7 +232,8 @@ function convertBinaryToDecimal (binary, output) {
     temp = temp.concat(MSD.toString()).concat(coefficient);
     temp = (parseInt(temp)) * Math.pow(10, exponent);
     let whole = new BigNumber(temp)
-    whole = whole.toFixed(2)
+    console.log(whole)
+    whole = (whole).toFixed(2)
     fixed = fixed.concat(sign).concat(whole.toString())
     console.log(fixed);
     float = float.concat(sign).concat(MSD.toString()).concat(coefficient).concat("x10^").concat(exponent.toString())
@@ -254,62 +255,63 @@ function convertBCDtoDecimal (binary, n) {
         //x x c 1 1 f 1 1 1 i  =>  100c 100f 100i  (8–9) (8–9) (8–9)
         if(binary[n + 3] == 1 && binary[n + 4] == 1) {
 
-            co = co.concat((8 + binary[n + 2]).toString())
-            co = co.concat((8 + binary[n + 5]).toString())
-            co = co.concat((8 + binary[n + 9]).toString())
+            co = co.concat((8 + parseInt(binary[n + 2])).toString())
+            co = co.concat((8 + parseInt(binary[n + 5])).toString())
+            co = co.concat((8 + parseInt(binary[n + 9])).toString())
             
         //a b c 1 0 f 1 1 1 i  =>  0abc 100f 100i  (0–7) (8–9) (8–9)
         } else if (binary[n + 3] == 1 && binary[n + 4] == 0) {
 
-            co = co.concat(((4 * binary[n + 0]) + (2 * binary[n + 1]) + (1 * binary[n + 2])).toString())
-            co = co.concat((8 + binary[n + 5]).toString())
-            co = co.concat((8 + binary[n + 9]).toString())
+            co = co.concat(((4 * parseInt(binary[n + 0])) + (2 * parseInt(binary[n + 1])) + (1 * parseInt(binary[n + 2]))).toString())
+            co = co.concat((8 + parseInt(binary[n + 5])).toString())
+            co = co.concat((8 + parseInt(binary[n + 9])).toString())
 
         //d e c 0 1 f 1 1 1 i  =>  100c 0def 100i  (8–9) (0–7) (8–9)
         } else if (binary[n + 3] == 0 && binary[n + 4] == 1) {
 
-            co = co.concat((8 + binary[n + 2]).toString())
-            co = co.concat(((4 * binary[n + 0]) + (2 * binary[n + 1]) + (1 * binary[n + 5])).toString())
-            co = co.concat((8 + binary[n + 9]).toString())
+            co = co.concat((8 + parseInt(binary[n + 2])).toString())
+            co = co.concat(((4 * parseInt(binary[n + 0])) + (2 * parseInt(binary[n + 1])) + (1 * parseInt(binary[n + 5]))).toString())
+            co = co.concat((8 + parseInt(binary[n + 9])).toString())
 
         //g h c 0 0 f 1 1 1 i  =>  100c 100f 0ghi  (8–9) (8–9) (0–7)
         } else if (binary[n + 3] == 0 && binary[n + 4] == 0) {
 
-            co = co.concat((8 + binary[n + 2]).toString())
-            co = co.concat((8 + binary[n + 5]).toString())
-            co = co.concat(((4 * binary[n + 0]) + (2 * binary[n + 1]) + (1 * binary[n + 9])).toString())
+            co = co.concat((8 + parseInt(binary[n + 2])).toString())
+            co = co.concat((8 + parseInt(binary[n + 5])).toString())
+            co = co.concat(((4 * parseInt(binary[n + 0])) + (2 * parseInt(binary[n + 1])) + (1 * parseInt(binary[n + 9]))).toString())
 
         }
 
     //g h c d e f 1 1 0 i  =>  100c 0def 0ghi  (8–9) (0–7) (0–7)    
     } else if(binary[n + 6] == 1 && binary[n + 7] == 1 && binary[n + 8] == 0) {
 
-        co = co.concat((8 + binary[n + 2]).toString())
-        co = co.concat(((4 * binary[n + 3]) + (2 * binary[n + 4]) + (1 * binary[n + 5])).toString())
-        co = co.concat(((4 * binary[n + 0]) + (2 * binary[n + 1]) + (1 * binary[n + 9])).toString())
+        co = co.concat((8 + parseInt(binary[n + 2])).toString())
+        co = co.concat(((4 * parseInt(binary[n + 3])) + (2 * parseInt(binary[n + 4])) + (1 * parseInt(binary[n + 5]))).toString())
+        co = co.concat(((4 * parseInt(binary[n + 0])) + (2 * parseInt(binary[n + 1])) + (1 * parseInt(binary[n + 9]))).toString())
 
     //a b c g h f 1 0 1 i  =>  0abc 100f 0ghi  (0–7) (8–9) (0–7)
     } else if(binary[n + 6] == 1 && binary[n + 7] == 0 && binary[n + 8] == 1) {
 
-        co = co.concat(((4 * binary[n + 0]) + (2 * binary[n + 1]) + (1 * binary[n + 2])).toString())
-        co = co.concat((8 + binary[n + 5]).toString())
-        co = co.concat(((4 * binary[n + 3]) + (2 * binary[n + 4]) + (1 * binary[n + 9])).toString())
+        co = co.concat(((4 * parseInt(binary[n + 0])) + (2 * parseInt(binary[n + 1])) + (1 * parseInt(binary[n + 2]))).toString())
+        co = co.concat((8 + parseInt(binary[n + 5])).toString())
+        co = co.concat(((4 * parseInt(binary[n + 3])) + (2 * parseInt(binary[n + 4])) + (1 * parseInt(binary[n + 9]))).toString())
 
     //a b c d e f 1 0 0 i  =>  0abc 0def 100i  (0–7) (0–7) (8–9)
     } else if(binary[n + 6] == 1 && binary[n + 7] == 0 && binary[n + 8] == 0) {
 
-        co = co.concat(((4 * binary[n + 0]) + (2 * binary[n + 1]) + (1 * binary[n + 2])).toString())
-        co = co.concat(((4 * binary[n + 3]) + (2 * binary[n + 4]) + (1 * binary[n + 5])).toString())
-        co = co.concat((8 + binary[n + 9]).toString())
+        co = co.concat(((4 * parseInt(binary[n + 0])) + (2 * parseInt(binary[n + 1])) + (1 * parseInt(binary[n + 2]))).toString())
+        co = co.concat(((4 * parseInt(binary[n + 3])) + (2 * parseInt(binary[n + 4])) + (1 * parseInt(binary[n + 5]))).toString())
+        co = co.concat((8 + parseInt(binary[n + 9])).toString())
 
     //a b c d e f 0 g h i  =>  0abc 0def 0ghi  (0-7) (0-7) (0-7)
     } else {
 
-        co = co.concat(((4 * binary[n + 0]) + (2 * binary[n + 1]) + (1 * binary[n + 2])).toString())
-        co = co.concat(((4 * binary[n + 3]) + (2 * binary[n + 4]) + (1 * binary[n + 5])).toString())
-        co = co.concat(((4 * binary[n + 7]) + (2 * binary[n + 8]) + (1 * binary[n + 9])).toString())
+        co = co.concat(((4 * parseInt(binary[n + 0])) + (2 * parseInt(binary[n + 1])) + (1 * parseInt(binary[n + 2]))).toString())
+        co = co.concat(((4 * parseInt(binary[n + 3])) + (2 * parseInt(binary[n + 4])) + (1 * parseInt(binary[n + 5]))).toString())
+        co = co.concat(((4 * parseInt(binary[n + 7])) + (2 * parseInt(binary[n + 8])) + (1 * parseInt(binary[n + 9]))).toString())
 
     }
 
+    console.log(co)
     return co
 }
